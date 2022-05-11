@@ -1,12 +1,5 @@
-import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Outlet, Link } from "react-router-dom";
 export default function Main() {
-  const loadUser = async ({ token }) => {
-    return new Promise((resolve, reject) => {
-      resolve({ token: "12345", name: "sushil" });
-    });
-  };
-
   return (
     <div>
       <h1>Bookkeeper</h1>
