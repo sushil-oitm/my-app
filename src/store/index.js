@@ -30,23 +30,20 @@ export const userSlice = createSlice({
     isLogin: false
   },
   reducers: {
-    updateName: (state, { payload: { name } }) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.name = name;
+    getLoginInfo: state => {
+      const info = { token: state.token, user: state.user, isLogin: state.isLogin };
+      return info;
     },
-    updateLoginInfo: (state, { payload: { token, isLogin } }) => {
+    updateLoginInfo: (state, { payload: { token, isLogin, user } }) => {
       state.token = token;
       state.isLogin = isLogin;
-    },
-    getToken: state => state.token
+      state.user = user;
+    }
   }
 });
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-export const { updateName, updateLoginInfo, getToken } = userSlice.actions;
+export const { updateLoginInfo, getLoginInfo } = userSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -64,7 +61,7 @@ export const incrementAsync = amount => dispatch => {
 export const selectCount = state => state.counter.value;
 
 const reducer = {
-  user: userSlice.reducer
+  userInfo: userSlice.reducer
 };
 
 export default configureStore({

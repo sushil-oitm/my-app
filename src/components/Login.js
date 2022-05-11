@@ -1,35 +1,16 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import localStorage from "../Utility/LocalStorage";
-import { updateLoginInfo, getToken } from "../store";
-import { useSelector, useDispatch } from "react-redux";
+import { authenticateUser } from "../Utility/UtilityMethods";
 
-async function loginUser(credentials) {
-  //   return fetch("http://localhost:8080/login", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify(credentials)
-  //   }).then(data => data.json());
-  return new Promise((resolve, reject) => {
-    resolve({ token: "12345", name: "sushil" });
-  });
-}
-
-export default function Login() {
+export default function Login({ setLogin }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
-  const dispatch = useDispatch();
   const handleSubmit = async e => {
     e.preventDefault();
-    const { token, name } = await loginUser({
-      username,
+    const { token, user } = await authenticateUser({
+      email: username,
       password
     });
-    dispatch(updateLoginInfo({ token, isLogin: true }));
-    localStorage.setItem("token", token);
-    localStorage.setItem("name", name);
+    setLogin({ token, user });
   };
 
   return (
