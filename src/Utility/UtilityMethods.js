@@ -2,7 +2,7 @@ import Storage from "./LocalStorage";
 import axios from "axios";
 let userData;
 let tokenData;
-const serverUrl = "http://localhost:5001/invoke";
+const serverUrl = "http://alphaapi5.manaze.io/invoke";
 // const logout = () => {
 //   return fetch({
 //     uri: {
